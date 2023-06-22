@@ -1,0 +1,64 @@
+\documentclass[fleqn]{article}
+
+\usepackage{mydefs}
+\usepackage{notes}
+\usepackage{url}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{hyperref}
+
+\begin{document}
+\lecture{Computer Vision}{HW3}{ECS 174, Spring 2023}
+
+% IF YOU ARE USING THIS .TEX FILE AS A TEMPLATE, PLEASE REPLACE
+% "CMSC 478/678, Fall 2015" WITH YOUR NAME AND UID.
+
+- You will learn how to train a deep network using PyTorch tool. Please read the following tutorial. You may skip the data parallelism section. Please use Google Colab to perform the experiments.
+
+\href{https://pytorch.org/tutorials/beginner/deep_learning_60min_blitz.html}{\em https://pytorch.org/tutorials/beginner/deep\_learning\_60min\_blitz.html}
+
+- CIFAR10 is a dataset of $60,000$ color images of size $32\times32\time3$ from $10$ categories. Please download the PyTorch tutorial code for CIFAR10 to start:
+
+\href{https://pytorch.org/tutorials/_downloads/cifar10_tutorial.py}{\em https://pytorch.org/tutorials/\_downloads/cifar10\_tutorial.py}
+
+- When you run the tutorial code, it will download CIFAR10 dataset for you. Please follow the instructions in the following link to install PyTorch:
+\href{https://pytorch.org/}{\em https://pytorch.org/}
+
+- To learn more, you can also find a tutorial for MNIST here:
+
+\href{https://pytorch.org/tutorials/beginner/blitz/neural_networks_tutorial.html\#sphx-glr-beginner-blitz-neural-networks-tutorial-py}{\em https://pytorch.org/tutorials/beginner/blitz/neural\_networks\_tutorial.html\#sphx-glr-beginner-blitz-neural-networks-tutorial-py}
+
+and the sample model for MNIST here:
+
+\href{https://github.com/pytorch/examples/blob/master/mnist/main.py}{\em https://github.com/pytorch/examples/blob/master/mnist/main.py}
+
+and the sample code for Imagenet here:
+
+\href{https://github.com/pytorch/examples/blob/master/imagenet/main.py}{\em https://github.com/pytorch/examples/blob/master/imagenet/main.py}
+
+- For all the following sections, train the model for $50$ epochs and plot the curve for loss, training accuracy, and test accuracy evaluated every epoch.
+
+\bee
+\item Run the tutorial code out of the box and make sure you get reasonable results. You will report these results later, so no report needed here.
+
+\item (15 points) Change the code to have only a single fully connected layer. The model will have a single layer that connects the input to the output. What is the number of parameters? In PyTorch, ''nn.Linear'' can be used for fully connected layer.
+
+\item (15 points) Change the code to have multiple fully connected layers. Try having a layer from input to $140$ neurons and then a layer to $84$ neurons, and finally a layer to $10$ neurons, one for each category. What happens if you do not use ReLU? Describe why.
+
+\item (15 points) Change the code by adding two convolutional layers along with maxpooling layers before the fully connected layers. This will be similar to the example in the tutorial. Use this model for the following sections.
+
+\item (15 points) Try multiple batch sizes to see the effect and describe the findings. Please use batch size of $1$, $4$, and $1000$. If $1000$ does not fit into the memory of your machine, please feel free to reduce it to a largest possible number.
+
+\item (15 points) Try multiple learning rates to see the effect and describe the findings. Please use learning rates of $10$, $0.1$, $0.01$, and $0.0001$.
+
+\item (25 points) Please add some data augmentation to avoid overfitting. Note that you need to do this only for the trainnig and not the testing. You may use Line 208 from Imagenet sample code:
+
+\href{https://github.com/pytorch/examples/blob/master/imagenet/main.py}{\em https://github.com/pytorch/examples/blob/master/imagenet/main.py}
+
+''RandomResizedCrop'' samples a random patch from the image to train the model on. ''RandomHorizontalFlip'' flips randomly chosen images horizontally.
+
+\item (15 points) (Extra Credit) Try multiple augmentations (maybe 10 times) at the test time and average the final probability distributions (10 numbers) before evaluation. You may also do Dropout multiple times at the test time and average the results before evaluation.
+%\item Change the loss function from Cross Entropy to Mean Squared Error and report the effect.
+
+\ene
+\end{document}
